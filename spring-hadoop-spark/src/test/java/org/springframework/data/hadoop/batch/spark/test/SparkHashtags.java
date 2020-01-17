@@ -30,6 +30,7 @@ import scala.Tuple2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class SparkHashtags {
 		});
 
 		JavaPairRDD<String, Integer> hashTags = tweets.flatMapToPair(new PairFlatMapFunction<Map<String, Object>, String, Integer>() {
-			public Iterable<Tuple2<String, Integer>> call(Map<String, Object> tweet) throws Exception {
+			public Iterator<Tuple2<String, Integer>> call(Map<String, Object> tweet) throws Exception {
 
 				Map<String, Object> entities = (Map<String, Object>) tweet.get("entities");
 				List<Map<String, Object>> hashTagEntries = null;
@@ -69,7 +70,7 @@ public class SparkHashtags {
 						hashTags.add(new Tuple2<String, Integer>(hashTag, 1));
 					}
 				}
-				return hashTags;
+				return hashTags.iterator();
 			}
 		});
 

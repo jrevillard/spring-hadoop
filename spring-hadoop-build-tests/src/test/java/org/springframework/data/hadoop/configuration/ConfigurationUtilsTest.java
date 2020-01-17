@@ -63,8 +63,7 @@ public class ConfigurationUtilsTest {
 
 		assertEquals("8", cfg.get("mapred.reduce.tasks"));
 		assertEquals("4", cfg.get("mapred.map.tasks"));
-		@SuppressWarnings("deprecation")
-		Job j = new Job(cfg);
+		Job j = Job.getInstance(cfg);
 		assertEquals("8", j.getConfiguration().get("mapred.reduce.tasks"));
 		assertEquals("4", j.getConfiguration().get("mapred.map.tasks"));
 	}
