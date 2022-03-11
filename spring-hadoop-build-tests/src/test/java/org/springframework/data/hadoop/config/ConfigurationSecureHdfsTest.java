@@ -36,7 +36,7 @@ public class ConfigurationSecureHdfsTest {
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
 				"ConfigurationSecureHdfsTest-context.xml",
 				ConfigurationSecureHdfsTest.class);
-		Assert.notNull(context.getBean("secureHdfsConfig"));
+		Assert.notNull(context.getBean("secureHdfsConfig"), "The secureHdfsConfig bean must not be null");
 		Configuration configuration = context.getBean("secureHdfsConfig", Configuration.class);
 		Object factory = context.getBean("&secureHdfsConfig");
 		String userKeytab = TestUtils.readField("userKeytab", factory);

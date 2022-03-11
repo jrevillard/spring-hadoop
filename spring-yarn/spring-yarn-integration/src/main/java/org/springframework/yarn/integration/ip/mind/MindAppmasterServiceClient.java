@@ -40,7 +40,7 @@ public abstract class MindAppmasterServiceClient extends IntegrationAppmasterSer
 	public BaseResponseObject doMindRequest(BaseObject request) {
 
 		try {
-			GenericRpcMessage<BaseObject> message = new GenericRpcMessage<BaseObject>(request);
+			GenericRpcMessage<BaseObject> message = new GenericRpcMessage<>(request);
 			RpcMessage<?> rpcMessage = get(message);
 			return getBaseResponseObject(rpcMessage);
 		} catch (Exception e) {

@@ -15,6 +15,8 @@
  */
 package org.springframework.data.hadoop.store;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import org.apache.hadoop.fs.Path;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,8 +61,9 @@ public class TimeoutTests {
 		DataStoreWriter<String> writer = ctx.getBean(DataStoreWriter.class);
 		String[] dataArray = new String[] { "0123456789" };
 		TestUtils.writeData(writer, dataArray, false, false);
-
-		Thread.sleep(2000);
+		
+		CountDownLatch waiter = new CountDownLatch(1);
+		waiter.await(5, TimeUnit.SECONDS);
 
 		TextFileReader reader = new TextFileReader(configuration, new Path("/tmp/TimeoutTests/testIdleTimeout/data"), null);
 		TestUtils.readDataAndAssert(reader, dataArray);
@@ -80,7 +83,8 @@ public class TimeoutTests {
 		String[] dataArray = new String[] { "0123456789" };
 		TestUtils.writeData(writer, dataArray, false, false);
 
-		Thread.sleep(2000);
+		CountDownLatch waiter = new CountDownLatch(1);
+        waiter.await(5, TimeUnit.SECONDS);
 
 		TextFileReader reader = new TextFileReader(configuration, new Path("/tmp/TimeoutTests/testCloseTimeout/data"), null);
 		TestUtils.readDataAndAssert(reader, dataArray);
@@ -102,7 +106,8 @@ public class TimeoutTests {
 		TestUtils.writeData(writer, dataArray1, false, false);
 		TestUtils.writeData(writer, dataArray2, false, false);
 
-		Thread.sleep(2000);
+		CountDownLatch waiter = new CountDownLatch(1);
+        waiter.await(5, TimeUnit.SECONDS);
 
 		TextFileReader reader = new TextFileReader(configuration, new Path("/tmp/TimeoutTests/testCloseTimeoutWithPartitioning/data/nordic_list"), null);
 		TestUtils.readDataAndAssert(reader, dataArray1);

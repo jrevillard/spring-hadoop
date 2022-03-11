@@ -60,7 +60,7 @@ public class SomeToolCopy extends Configured implements Tool {
 	}
 
 	public final Job createJob(Configuration conf) throws Exception {
-		Assert.notNull(conf);
+		Assert.notNull(conf, "Configuration must not be null");
 		@SuppressWarnings("deprecation")
 		Job j = new Job(conf, "tool-test");
 		j.setMapperClass(CustomMapper.class);

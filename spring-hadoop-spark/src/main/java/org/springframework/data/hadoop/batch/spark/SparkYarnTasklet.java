@@ -15,6 +15,8 @@
  */
 package org.springframework.data.hadoop.batch.spark;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.spark.SparkConf;
 import org.apache.spark.deploy.yarn.Client;
@@ -29,9 +31,6 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Spark tasklet running Spark jobs on demand on YARN cluster.
@@ -77,7 +76,7 @@ public class SparkYarnTasklet implements InitializingBean, Tasklet, StepExecutio
 			sparkConf.set("spark.driver.extraClassPath", extraClassPath);
 			sparkConf.set("spark.executor.extraClassPath", extraClassPath);
 		}
-		List<String> submitArgs = new ArrayList<String>();
+		List<String> submitArgs = new ArrayList<>();
 		if (StringUtils.hasText(appName)) {
 			submitArgs.add("--name");
 			submitArgs.add(appName);
@@ -115,8 +114,8 @@ public class SparkYarnTasklet implements InitializingBean, Tasklet, StepExecutio
 			submitArgs.add(arg);
 		}
 		ClientArguments clientArguments =
-				new ClientArguments(submitArgs.toArray(new String[submitArgs.size()]), sparkConf);
-		Client client = new Client(clientArguments, hadoopConfiguration, sparkConf);
+				new ClientArguments(submitArgs.toArray(new String[submitArgs.size()]));
+		Client client = new Client(clientArguments, sparkConf, null);
 		System.setProperty("SPARK_YARN_MODE", "true");
 		client.run();
 		complete = true;

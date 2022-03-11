@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
@@ -107,7 +107,7 @@ public class HdfsItemWriterTest {
 		writer.open(null);
 		writer.write(new ArrayList<String>());
 
-		verifyZeroInteractions(fsDataOutputStream);
+		verifyNoInteractions(fsDataOutputStream);
 	}
 
 	@Test
@@ -175,7 +175,7 @@ public class HdfsItemWriterTest {
 			fail("Unexpected exception was thrown: " + t.getMessage());
 		}
 
-		verifyZeroInteractions(fsDataOutputStream);
+		verifyNoInteractions(fsDataOutputStream);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class HdfsItemWriterTest {
 			fail("Unexpected exception was thrown: " + t.getMessage());
 		}
 
-		verifyZeroInteractions(fsDataOutputStream);
+		verifyNoInteractions(fsDataOutputStream);
 	}
 
 	@Test

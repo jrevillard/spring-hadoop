@@ -234,8 +234,6 @@ public abstract class AbstractContainerClusterAppmaster extends AbstractEventing
 
 		StateMachine<ClusterState, ClusterEvent> stateMachine = stateMachineFactory
 				.getStateMachine();
-		// start here due to spring-statemachine #113
-		stateMachine.start();
 		DefaultContainerCluster cluster = new DefaultContainerCluster(clusterId, projection, stateMachine, extraProperties);
 		clusters.put(cluster.getId(), cluster);
 		clusterIdToRef.put(clusterId, clusterDef);

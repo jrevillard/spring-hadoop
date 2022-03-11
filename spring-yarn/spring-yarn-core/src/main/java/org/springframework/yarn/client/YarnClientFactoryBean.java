@@ -44,7 +44,7 @@ public class YarnClientFactoryBean implements InitializingBean, FactoryBean<Yarn
 	/** Client returned by this factory */
 	private YarnClient client;
 
-	private Class<? extends YarnClient> clientClass = CommandYarnClient.class;
+	private Class<? extends YarnClient> clientClass = DefaultApplicationYarnClient .class;
 
 	/** Container request priority */
 	private int priority = 0;
@@ -53,7 +53,7 @@ public class YarnClientFactoryBean implements InitializingBean, FactoryBean<Yarn
 	private int virtualcores = 1;
 
 	/** Resource capability as of memory */
-	private int memory = 64;
+	private long memory = 64;
 
 	/** Yarn queue for the request */
 	private String queue = "default";
@@ -213,7 +213,7 @@ public class YarnClientFactoryBean implements InitializingBean, FactoryBean<Yarn
 	 *
 	 * @param memory the new memory
 	 */
-	public void setMemory(int memory) {
+	public void setMemory(long memory) {
 		this.memory = memory;
 	}
 
