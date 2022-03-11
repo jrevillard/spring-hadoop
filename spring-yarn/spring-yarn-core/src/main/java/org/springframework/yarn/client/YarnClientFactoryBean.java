@@ -44,7 +44,7 @@ public class YarnClientFactoryBean implements InitializingBean, FactoryBean<Yarn
 	/** Client returned by this factory */
 	private YarnClient client;
 
-	private Class<? extends YarnClient> clientClass = CommandYarnClient.class;
+	private Class<? extends YarnClient> clientClass = DefaultApplicationYarnClient .class;
 
 	/** Container request priority */
 	private int priority = 0;

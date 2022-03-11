@@ -29,7 +29,7 @@ import org.springframework.yarn.YarnSystemConstants;
  * @author Janne Valkealahti
  *
  */
-public class CommandYarnClient extends AbstractYarnClient {
+public abstract class CommandYarnClient extends AbstractYarnClient {
 	
 	private final static Log log = LogFactory.getLog(CommandYarnClient.class);
 
